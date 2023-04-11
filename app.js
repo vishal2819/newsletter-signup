@@ -2,11 +2,9 @@
 
 const express = require("express");
 const app = express();
-const request = require("request");
 const bodyParser = require("body-parser");
 const https = require("https");
-const { response } = require("express");
-const { post } = require("request");
+require("dotenv").config();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -36,11 +34,11 @@ app.post("/", (req, res) => {
 
   const jsonData = JSON.stringify(data);
 
-  const url = "https://us13.api.mailchimp.com/3.0/lists/5976bc563e";
+  const url = 'https://us13.api.mailchimp.com/3.0/lists/5976bc563e';
 
   const options = {
     method: "Post",
-    auth: "vishal1:ac3a555a51b9807441483a7ba4f1e296-us13",
+    auth: `vishal1:${process.env.API_KEY}`,
   };
 
   const request = https.request(url, options, (response) => {
@@ -57,16 +55,6 @@ app.post("/", (req, res) => {
   request.end();
 });
 
-app.post("/failure", (req, res) => {
-  res.redirect("/");
+app.listen(process.env.PORT || 5000, () => {
+  console.log("Server is running on port 5000");
 });
-
-app.listen(process.env.PORT || 3000, () => {
-  console.log("Server is running on port 3000");
-});
-
-// Api key
-//ac3a555a51b9807441483a7ba4f1e296-us13
-
-// List id
-// 5976bc563e
