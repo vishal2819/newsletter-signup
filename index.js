@@ -5,8 +5,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const https = require("https");
 require("dotenv").config();
-const ENV = require('./config.js');
- 
+const ENV = require("./config.js");
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
@@ -35,7 +35,7 @@ app.post("/", (req, res) => {
 
   const jsonData = JSON.stringify(data);
 
-  const url = 'https://us13.api.mailchimp.com/3.0/lists/5976bc563e';
+  const url = "https://us13.api.mailchimp.com/3.0/lists/5976bc563e";
 
   const options = {
     method: "Post",
@@ -56,6 +56,6 @@ app.post("/", (req, res) => {
   request.end();
 });
 
-app.listen( process.env.PORT || 5000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log("Server is running on port 5000");
 });
