@@ -5,6 +5,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const https = require("https");
 require("dotenv").config();
+const ENV = require('./config')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -38,7 +39,7 @@ app.post("/", (req, res) => {
 
   const options = {
     method: "Post",
-    auth: `vishal1:${process.env.API_KEY}`,
+    auth: `vishal1:${ENV.API_KEY}`,
   };
 
   const request = https.request(url, options, (response) => {
